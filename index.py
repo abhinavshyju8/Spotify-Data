@@ -3,6 +3,7 @@ import base64
 import requests
 from dotenv import load_dotenv
 import os
+import json
 
 load_dotenv('.env')
 CLIENT_ID = os.getenv('CLIENT_ID')
@@ -11,21 +12,26 @@ CLIENT_SECRET = os.getenv('CLIENT_SECRET')
 
 def access_token():
     try:
-       # combining client id and client secret
+        if not CLIENT_ID or not CLIENT_SECRET:
+            raise ValueError("CLIENT_ID or CLIENT_SECRET not found in environment variables")
+        # combining client id and client secret
         credentials = f"{CLIENT_ID}:{CLIENT_SECRET}"
-       # encoding the credentials to base64
+        # encoding the credentials to base64
         encoded_credentials = base64.b64encode(credentials.encode()).decode()
-        response=requests.post(
-          'https://accounts.spotify.com/api/token',
-           headers={"Authorization":f"Basic {encoded_credentials}"},
-           data={"grant_type":"client_credentials"})
-        # print(response.json())
-        # print(response.json()['access_token'])
-
+        response = requests.post(
+            'https://accounts.spotify.com/api/token',
+            headers={"Authorization": f"Basic {encoded_credentials}"},
+            data={"grant_type": "client_credentials"})
+        
+        if response.status_code != 200:
+            print(f"Spotify API Error (Status {response.status_code}): {response.text}")
+            response.raise_for_status()
+        
         print("Token generated successfully")
         return response.json()['access_token']
     except Exception as e:
         print("Failed to generate token:", e)
+        return None
 print(access_token())        
 
 
@@ -48,8 +54,13 @@ def get_new_release():
            a={
               'album_name':i['name'],
               'release_date':i['release_date'],
+              'artist_name': i['artists'][0]['name'],
+              'album_type': i['album_type'],
+              'total_tracks': i['total_tracks'],
+              'spotify_url': i['external_urls']['spotify'],
+              'album_image': i['images'][0]['url'] if i['images'] else None
            }
-           print(a)
+           print(json.dumps(a, indent=2))
     except Exception as e:
         print("Failed to get new releases:", e)  
 
