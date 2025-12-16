@@ -32,7 +32,7 @@ def access_token():
     except Exception as e:
         print("Failed to generate token:", e)
         return None
-print(access_token())        
+# print(access_token())        
 
 
 
@@ -46,7 +46,6 @@ def get_new_release():
        response = requests.get('https://api.spotify.com/v1/browse/new-releases', headers=header,params=param) 
 
        if response.status_code == 200:
-        #   print(response.json())
         data=response.json()
         release=[]
         albums=data['albums']['items']
@@ -60,7 +59,11 @@ def get_new_release():
               'spotify_url': i['external_urls']['spotify'],
               'album_image': i['images'][0]['url'] if i['images'] else None
            }
-           print(json.dumps(a, indent=2))
+           release.append(a)
+        # Save to JSON file
+        with open('spotify_releases.json', 'w') as f:
+            json.dump(release, f, indent=2)
+        print("JSON data saved to spotify_releases.json")
     except Exception as e:
         print("Failed to get new releases:", e)  
 
