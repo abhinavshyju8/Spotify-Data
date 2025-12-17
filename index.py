@@ -10,6 +10,8 @@ from pathlib import Path
 load_dotenv('.env')
 CLIENT_ID = os.getenv('CLIENT_ID')
 CLIENT_SECRET = os.getenv('CLIENT_SECRET')
+ACCESS_KEY = os.getenv('ACCESS_KEY')
+ACCESS_SECRET = os.getenv('ACCESS_SECRET')
 #    acreating a tocken function
 
 def access_token():
@@ -142,8 +144,6 @@ def get_new_release():
         print("Failed to get new releases:", e)  
 
     try:
-        ACCESS_KEY ="AKIAY76LDABGX34MGQUI"
-        ACCESS_SECRET ="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"
         BUCKET_NAME ="kinu.bucket"
         REGION_NAME ="ap-southeast-2"
         OBJECT_NAME ="spotify_releases.json"
