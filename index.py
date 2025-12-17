@@ -5,12 +5,14 @@ import requests
 from dotenv import load_dotenv
 import os
 import json
+import boto3
 
 load_dotenv('.env')
 CLIENT_ID = os.getenv('CLIENT_ID')
 CLIENT_SECRET = os.getenv('CLIENT_SECRET')
 ACCESS_KEY = os.getenv('ACCESS_KEY')
 ACCESS_SECRET = os.getenv('ACCESS_SECRET')
+REGION_NAME = os.getenv('REGION_NAME')
 #    acreating a tocken function
 
 def access_token():
@@ -72,7 +74,6 @@ def get_new_release():
 
     try:
         BUCKET_NAME ="kinu.bucket"
-        REGION_NAME ="ap-southeast-2"
         OBJECT_NAME ="spotify_releases.json"
         FILE_NAME =r"D:\ABHI\Spotify\Spotify-Data\spotify_releases.json"
 
