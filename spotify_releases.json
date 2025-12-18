@@ -414,15 +414,6 @@
     "album_image": "https://i.scdn.co/image/ab67616d00001e0283c6d28a8bf5400e4db97bca"
   },
   {
-    "album_name": "We Can't Stop",
-    "release_date": "2024-02-09",
-    "artist_name": "AFROJACK",
-    "album_type": "single",
-    "total_tracks": 1,
-    "spotify_url": "https://open.spotify.com/album/27LVMe5wMsHddairHoCux2",
-    "album_image": "https://i.scdn.co/image/ab67616d00001e02567c92f98c7d65c012428c49"
-  },
-  {
     "album_name": "Never Be Lonely",
     "release_date": "2024-02-09",
     "artist_name": "Jax Jones",
@@ -430,6 +421,15 @@
     "total_tracks": 1,
     "spotify_url": "https://open.spotify.com/album/1DCiXnF1Z9XX4zxYCFytSX",
     "album_image": "https://i.scdn.co/image/ab67616d00001e02a1d3ca82b712927a48774655"
+  },
+  {
+    "album_name": "We Can't Stop",
+    "release_date": "2024-02-09",
+    "artist_name": "AFROJACK",
+    "album_type": "single",
+    "total_tracks": 1,
+    "spotify_url": "https://open.spotify.com/album/27LVMe5wMsHddairHoCux2",
+    "album_image": "https://i.scdn.co/image/ab67616d00001e02567c92f98c7d65c012428c49"
   },
   {
     "album_name": "crush",

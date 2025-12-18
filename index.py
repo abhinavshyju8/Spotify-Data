@@ -3,10 +3,14 @@ import requests
 from dotenv import load_dotenv
 import os
 import json
+import boto3
 
 load_dotenv('.env')
 CLIENT_ID = os.getenv('CLIENT_ID')
 CLIENT_SECRET = os.getenv('CLIENT_SECRET')
+ACCESS_KEY = os.getenv('ACCESS_KEY')
+ACCESS_SECRET = os.getenv('ACCESS_SECRET')
+
 #    acreating a tocken function
 
 def access_token():
@@ -65,5 +69,23 @@ def get_new_release():
         print("JSON data saved to spotify_releases.json")
     except Exception as e:
         print("Failed to get new releases:", e)  
+
+    try:
+        BUCKET_NAME ="kinu.bucket"
+        REGION_NAME ="ap-southeast-2"
+        OBJECT_NAME ="spotify_releases.json"
+        FILE_NAME =r"D:\ABHI\Spotify\Spotify-Data\spotify_releases.json"
+
+    
+        S3_CLIENT = boto3.client(service_name='s3',
+                 region_name=REGION_NAME,
+                 aws_access_key_id=ACCESS_KEY,
+                 aws_secret_access_key=ACCESS_SECRET)
+        S3_CLIENT.upload_file(FILE_NAME, BUCKET_NAME, OBJECT_NAME)
+        print("File uploaded successfully")
+    except Exception as e:
+        print(f"Error occurred: {e}")
+
+
 
 get_new_release()
